@@ -1,0 +1,51 @@
+1. What tech stack will you use for your final project? We recommend that you use
+React and Node for this project, however if you are extremely interested in
+becoming a Python developer you are welcome to use Python/Flask for this
+project.
+I will be using React and Node.js.
+
+2. Is the front-end UI or the back-end going to be the focus of your project? Or are
+you going to make an evenly focused full-stack application?
+Both front-end and back-end will be crucial for my design, however the majority of the work will likely be on the front-end.
+
+3. Will this be a website? A mobile app? Something else?
+I will be creating a website.
+
+4. What goal will your project be designed to achieve?
+I will be creating a website designed to connect climbers looking for climbing partners. 
+
+5. What kind of users will visit your app? In other words, what is the demographic of
+your users?
+Climbers are the intended users of my website.
+
+6. What data do you plan on using? How are you planning on collecting your data?
+You may have not picked your actual API yet, which is fine, just outline what kind
+of data you would like it to contain. You are welcome to create your own API and
+populate it with data. If you are using a Python/Flask stack are required to create
+your own API.
+I plan to use weather data from a weather API. 
+
+7. In brief, outline your approach to creating your project (knowing that you may not
+know everything in advance and that these details might change later). Answer
+questions like the ones below, but feel free to add more information.
+
+a. What does your database schema look like?
+My schema will have areas, users, and messages. For each area there can be messages from users. Each user can create messages. Users will be able to create and view messages from any area.
+
+b. What kinds of issues might you run into with your API? This is especially
+important if you are creating your own API, web scraping produces
+notoriously messy data.
+Hopefully the API will not be the source of too much difficulty, at a first look there seems to be various free open source weather APIs to choose from.
+
+c. Is there any sensitive information you need to secure?
+User passwords will need to be encrypted. 
+
+d. What functionality will your app include?
+The app will center around message boards. The main functionality for this app is to allow message between users on public boards to foster connections and information sharing between users.
+
+e. What will the user flow look like?
+The home page will display options for the user to either login or create an account. Once the user logs in it will take them to their user home page which will display links to their favorited areas, a link to search for a new area, and links to update their profile info. The home pages for each area will contain a message board and display the current weather for the location. 
+
+f. What features make your site more than a CRUD app? What are your
+stretch goals?
+A stretch goal for the website is to allow direct messaging between users.
