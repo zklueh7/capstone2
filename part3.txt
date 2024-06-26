@@ -1,0 +1,2 @@
+Database schema: https://dbdiagram.io/d/Capstone-2-666af3efa179551be6cedd0d
+API: https://www.weatherapi.com/
