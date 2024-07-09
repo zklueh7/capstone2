@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import "./AreaCard.css";
+import { useParams, Link } from "react-router-dom";
 import LoadingSpinner from "../common/LoadingSpinner";
 import CatchAppApi from "../api/api";
+import MessageCard from "./MessageCard";
+import NewMessageForm from "./NewMessageForm";
 import UserContext from "../auth/UserContext";
-import AreaNavbar from "../routes-nav/AreaNavbar";
 
 /** Show limited information about an area.
  *
@@ -16,14 +16,37 @@ import AreaNavbar from "../routes-nav/AreaNavbar";
 function AreaMessages() {
   console.debug("AreaMessages");
   const { area } = useParams();
+  const { currentUser } = useContext(UserContext);
+  const time = "now";
+  console.log(area);
+
+  const [areaInfo, setAreaInfo] = useState(null);
+  const [messages, setMessages] = useState(null);
+
+  useEffect(function getAreaAndMessageInfoOnMount() {
+    console.debug("getAreaAndMessageInfoOnMount");
+    search(area);
+  }, []);
+
+  /** Loads area info and messages. */
+  async function search(area) {
+    let areaInfo = await CatchAppApi.getArea(area);
+    setAreaInfo(areaInfo);
+    let messages = await CatchAppApi.getMessages(area);
+    setMessages(messages);
+    console.log(messages);
+  }
+  if (!areaInfo) return <LoadingSpinner />;
+  if (!messages) return <LoadingSpinner />;
 
   return (
-      <div className="areaDetail">
-        <AreaNavbar />  
-        <div className="card-body ml-1 pt-2">
-          <h6 className="card-title">{area} messages</h6>
-        </div>
-      </div>
+    <div className="area-list col-md-8 offset-md-2 pt-4 ml-2">
+      {messages.length
+      ? <MessageCard messages={messages} />
+      : <p className="lead">Sorry, no messages yet!</p>
+      }
+      <NewMessageForm area={area} user={currentUser.username} time={time}/>
+    </div>
   );
 }
 

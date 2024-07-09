@@ -1,21 +1,20 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
-import "./AreaCard.css";
+import { useParams, useLocation, Link } from "react-router-dom";
 import LoadingSpinner from "../common/LoadingSpinner";
 import CatchAppApi from "../api/api";
 import UserContext from "../auth/UserContext";
 import AreaNavbar from "../routes-nav/AreaNavbar";
 
 
-/** Show limited information about an area.
+/** Show area home page
  *
- * Is rendered by AreaCardList to show a "card" for each area.
+ * Area description and links to area message board and weather pages
  *
- * AreaCardList -> AreaCard
+ * Linked to from AreaCard
  */
 
-function AreaDetail() {
-  console.debug("AreaDetail");
+function AreaHome() {
+  console.debug("AreaHome");
   const { area } = useParams();
 
   const [areaInfo, setAreaInfo] = useState(null);
@@ -27,22 +26,22 @@ function AreaDetail() {
 
   /** Loads area info and messages. */
   async function search(myArea) {
-    let areaInfo = await CatchAppApi.getAreas(area);
+    let areaInfo = await CatchAppApi.getArea(area);
     setAreaInfo(areaInfo);
   }
   if (!areaInfo) return <LoadingSpinner />;
 
   return (
-      <div className="areaDetail">
-        <AreaNavbar />
+      <div className="area-home">
         <div className="card-body ml-1 pt-2">
-          <h6 className="card-title">{areaInfo[0].title}</h6>
-          <img src={areaInfo[0].pictureUrl}></img>
-          <p>{areaInfo[0].description}</p>
+          <h6 className="card-title">{areaInfo.title}</h6>
+          <p>{areaInfo.description}</p>
+          <Link className="card-title" to={{pathname: `/areas/${areaInfo.name}/weather`}}>Weather</Link><br></br>
+          <Link className="card-title" to={{pathname: `/areas/${areaInfo.name}/messages`}}>Message Board</Link>
         </div>
       </div>
   );
 }
 
 
-export default AreaDetail;
+export default AreaHome;

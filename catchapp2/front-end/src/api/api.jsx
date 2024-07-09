@@ -86,6 +86,13 @@ class CatchAppApi {
       console.log(res);
       return res.messages;
     }
+
+    /** Post new message to database */
+    static async postMessage(data) {
+      let res = await this.request("messages", data, "post" );
+      console.log(res);
+      return res.message;
+    }
 }
 
 

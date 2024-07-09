@@ -1,28 +1,26 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import "./AreaCard.css";
-import UserContext from "../auth/UserContext";
 
-/** Show limited information about an area.
+/** Show list of area cards.
  *
- * Is rendered by AreaCardList to show a "card" for each area.
+ * Used by AreaList to list areas. 
  *
- * AreaCardList -> AreaCard
+ * AreaList -> AreaCardList -> AreaCard
+ *
  */
 
-function AreaCard({ name, latitude, longitude, description, picture }) {
-  console.debug("AreaCard");
+function AreaCard({ areas }) {
+  console.debug("AreaCardList", "areas=", areas);
 
   return (
-      <div className="JobCard card">
-        <div className="card-body">
-          <Link className="card-title" to={{pathname: `/areas/${name}`, state: `${name}`}}>{name}</Link>
-          <p>Description: {description}</p>
-          <img src={picture}></img>
-        </div>
+      <div className="AreaCardList">
+        {areas.map(area => (
+          <div className="card-body">
+              <Link className="card-title" to={{pathname: `/areas/${area.name}`}}>{area.title}</Link><br></br>
+              <img src={area.pictureUrl}></img>
+          </div>
+        ))}
       </div>
   );
 }
-
-
 export default AreaCard;

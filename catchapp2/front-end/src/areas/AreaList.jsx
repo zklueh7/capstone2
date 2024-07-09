@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Search from "../common/SearchForm";
 import CatchAppApi from "../api/api";
-import AreaCardList from "./AreaCardList";
+import AreaCard from "./AreaCard";
 import LoadingSpinner from "../common/LoadingSpinner";
 
 /** Show page with list of areas.
@@ -20,7 +20,7 @@ function AreaList() {
   const [areas, setAreas] = useState(null);
 
   useEffect(function getAllAreasOnMount() {
-    console.debug("AreaList useEffect getAllAreasOnMount");
+    console.debug("useEffect getAllAreasOnMount");
     search();
   }, []);
 
@@ -32,10 +32,10 @@ function AreaList() {
   if (!areas) return <LoadingSpinner />;
 
   return (
-      <div className="JobList col-md-8 offset-md-2 pt-4">
+      <div className="area-list col-md-8 offset-md-2 pt-4 ml-2">
             <Search searchFor={search} />
             {areas.length
-            ? <AreaCardList areas={areas} />
+            ? <AreaCard areas={areas} />
             : <p className="lead">Sorry, no results were found!</p>
             }
       </div>

@@ -6,7 +6,7 @@ import LoginForm from "../auth/LoginForm";
 import Profile from "../profiles/Profile";
 import ProfileForm from "../profiles/ProfileForm";
 import AreaList from "../areas/AreaList";
-import AreaDetail from "../areas/AreaDetail";
+import AreaDetail from "../areas/AreaHome";
 import AreaMessages from "../areas/AreaMessages";
 import AreaWeather from "../areas/AreaWeather";
 

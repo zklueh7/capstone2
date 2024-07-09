@@ -1,70 +1,72 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
+import CatchAppApi from "../api/api";
 
-/** Search bar for areas
+/** New message form.
  *
+ * Add a new message to a message board
+ * 
  */
 
-function Search() {
-  const history = useHistory();
+function NewMessageForm({ area, user, time }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    area: "",
+    messageText: "",
+    area: area,
+    fromUser: user,
+    timePosted: time,
   });
   const [formErrors, setFormErrors] = useState([]);
 
   console.debug(
-      "SearchBar",
+      "NewMessageForm",
       "formData=", formData,
-      "formErrors", formErrors,
+      "formErrors=", formErrors,
   );
 
   /** Handle form submit:
    *
-   * Calls login func prop and, if successful, redirect to /companies.
+   * Calls login func prop and, if successful, redirect to homepage.
    */
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    let result = await login(formData);
-    if (result.success) {
-      history.push("/companies");
-    } else {
-      setFormErrors(result.errors);
-    }
+    let result = await CatchAppApi.postMessage(formData);
+    console.log(result);
+    navigate(`/areas/${area}/messages`);
   }
 
   /** Update form data field */
   function handleChange(evt) {
     const { name, value } = evt.target;
-    setFormData(l => ({ ...l, [name]: value }));
+    setFormData(data => ({ ...data, [name]: value }));
   }
 
   return (
-      <div className="search-bar">
+      <div className="SignupForm">
         <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-          <h3 className="mb-3">Search</h3>
-
+          <h3 className="mb-3">Post a message:</h3>
           <div className="card">
             <div className="card-body">
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label>Area</label>
+                  <label>Message</label>
                   <input
-                      name="area"
+                      name="messageText"
                       className="form-control"
-                      value={formData.area}
+                      value={formData.messageText}
                       onChange={handleChange}
-                      autoComplete="area"
-                      required
                   />
                 </div>
 
-                {formErrors.length
+                {/* {formErrors.length
                     ? <Alert type="danger" messages={formErrors} />
-                    : null}
+                    : null
+                } */}
 
                 <button
+                    type="submit"
                     className="btn btn-primary float-right"
                     onSubmit={handleSubmit}
                 >
@@ -78,4 +80,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default NewMessageForm;
