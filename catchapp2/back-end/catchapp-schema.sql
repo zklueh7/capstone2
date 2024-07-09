@@ -25,5 +25,5 @@ CREATE TABLE messages (
   message_text TEXT NOT NULL,
   area TEXT NOT NULL,
   from_user TEXT NOT NULL,
-  time_posted TEXT NOT NULL
+  time_posted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

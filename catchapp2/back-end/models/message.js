@@ -19,15 +19,13 @@ class Message {
     const result = await db.query(
           `INSERT INTO messages (message_text,
                              area,
-                             from_user,
-                             time_posted)
-           VALUES ($1, $2, $3, $4)
+                             from_user)
+           VALUES ($1, $2, $3)
            RETURNING id, message_text AS "messageText", area, from_user AS "fromUser", time_posted AS "timePosted"`,
         [
           data.messageText,
           data.area,
           data.fromUser,
-          data.timePosted,
         ]);
     let message = result.rows[0];
 

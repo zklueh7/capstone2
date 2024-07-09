@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Search from "../common/SearchForm";
+import Search from "../search/SearchForm";
 import CatchAppApi from "../api/api";
 import AreaCard from "./AreaCard";
 import LoadingSpinner from "../common/LoadingSpinner";
+import "./Area.css";
 
 /** Show page with list of areas.
  *

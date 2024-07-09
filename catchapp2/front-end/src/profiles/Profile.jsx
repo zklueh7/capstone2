@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../auth/UserContext"; 
 import "./Profile.css";
-import UserContext from "../auth/UserContext";
 
 /** User profile page
  *
@@ -16,10 +16,12 @@ function Profile() {
   console.debug("User Profile", "currentUser=", currentUser);
 
   return (
-      <div className="Profile pt-4">
+      <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <h3 className="text-center mt-2">My Profile</h3>
+        <div className="card">
         <div className="container text-center">
-            <h1 className="mb-4 font-weight-bold">My Profile</h1>
-            <img src={currentUser.pictureUrl || miscClimber}></img>
+            
+            <img src={currentUser.pictureUrl } className="prof-img"></img>
             <p>Username: {currentUser.username}</p>
             <p>First Name: {currentUser.firstName}</p>
             <p>Last Name: {currentUser.lastName}</p>
@@ -33,6 +35,9 @@ function Profile() {
                 </Link>
             </p>
         </div>
+        </div>
+
+
       </div>
   );
 }

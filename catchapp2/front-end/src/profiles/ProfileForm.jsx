@@ -103,16 +103,16 @@ function ProfileForm() {
 
   return (
       <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
-        <h3>Profile</h3>
+        <h3 className="text-center mt-2">Edit Profile</h3>
         <div className="card">
           <div className="card-body">
             <form>
               <div className="form-group">
-                <label>Username</label>
+                <label>Username:</label>
                 <p className="form-control-plaintext">{formData.username}</p>
               </div>
               <div className="form-group">
-                <label>First Name</label>
+                <label>First Name:</label>
                 <input
                     name="firstName"
                     className="form-control"
@@ -121,7 +121,7 @@ function ProfileForm() {
                 />
               </div>
               <div className="form-group">
-                <label>Last Name</label>
+                <label>Last Name:</label>
                 <input
                     name="lastName"
                     className="form-control"
@@ -130,7 +130,7 @@ function ProfileForm() {
                 />
               </div>
               <div className="form-group">
-                <label>Email</label>
+                <label>Email:</label>
                 <input
                     name="email"
                     className="form-control"
@@ -148,7 +148,7 @@ function ProfileForm() {
                 />
               </div>
               <div className="form-group">
-                <label>Climbing Type</label>
+                <label>Climbing Type:</label>
                 <input
                     name="climbingType"
                     className="form-control"
@@ -157,7 +157,7 @@ function ProfileForm() {
                 />
               </div>
               <div className="form-group">
-                <label>Experience Level</label>
+                <label>Experience Level:</label>
                 <input
                     name="experienceLevel"
                     className="form-control"
@@ -166,7 +166,7 @@ function ProfileForm() {
                 />
               </div>
               <div className="form-group">
-                <label>Picture URL</label>
+                <label>Picture URL:</label>
                 <input
                     name="pictureUrl"
                     className="form-control"
@@ -195,7 +195,7 @@ function ProfileForm() {
                   : null}
 
               <button
-                  className="btn btn-primary btn-block mt-4"
+                  className="btn btn-primary btn-block mt-2"
                   onClick={handleSubmit}
               >
                 Save Changes

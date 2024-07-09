@@ -30,7 +30,7 @@ function Navbar({ logout }) {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/" onClick={logout}>
-              Log out {currentUser.first_name || currentUser.username}
+              Log Out {currentUser.first_name || currentUser.username}
             </Link>
           </li>
         </ul>

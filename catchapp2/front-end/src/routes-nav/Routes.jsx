@@ -7,7 +7,7 @@ import Profile from "../profiles/Profile";
 import ProfileForm from "../profiles/ProfileForm";
 import AreaList from "../areas/AreaList";
 import AreaDetail from "../areas/AreaHome";
-import AreaMessages from "../areas/AreaMessages";
+import AreaMessages from "../messages/AreaMessages";
 import AreaWeather from "../areas/AreaWeather";
 
 /** Site-wide routes.

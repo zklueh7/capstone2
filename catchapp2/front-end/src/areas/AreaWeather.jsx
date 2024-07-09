@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import LoadingSpinner from "../common/LoadingSpinner";
 import CatchAppApi from "../api/api";
-import UserContext from "../auth/UserContext";
 import axios from "axios";
 
 
@@ -31,7 +30,6 @@ function AreaWeather() {
     setAreaInfo(areaInfo);
     getWeather(areaInfo.latitude, areaInfo.longitude);
   }
-  if (!areaInfo) return <LoadingSpinner />;
 
   /** Loads area weather */
   async function getWeather(lat, lng) {
@@ -44,17 +42,21 @@ function AreaWeather() {
   if (!areaWeather) return <LoadingSpinner />;
 
   return (
-      <div className="area-weather">
-        <div className="card-body ml-1 pt-2">
-        
-          <h6 className="card-title">{areaInfo.title} weather</h6>
-          <img src={areaWeather.data.current.condition.icon}></img>
-          <p>{areaWeather.data.current.condition.text}</p>
-          <p>Temperature: {areaWeather.data.current.temp_f} degrees F</p>
-          <p>Wind: {areaWeather.data.current.wind_mph} mph</p>
-          <Link className="card-title" to={{pathname: `/areas/${area}`}}>Back to Area Home</Link>
-        </div>  
-      </div>
+
+    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+      <h3 className="text-center mt-2">{areaInfo.title} Weather</h3>
+        <div className="card">
+          <div className="container text-center">
+            <img src={areaWeather.data.current.condition.icon} className="forecast-img"></img>
+            <p>{areaWeather.data.current.condition.text}</p>
+            <p>Temperature: {areaWeather.data.current.temp_f} degrees F</p>
+            <p>Humidity: {areaWeather.data.current.temp_f} %</p>
+            <p>Wind: {areaWeather.data.current.wind_mph} mph</p>
+          </div>
+        </div>
+        <Link className="btn btn-primary btn-block mt-2" to={{pathname: `/areas/${area}`}}>Back to Area Home</Link>
+    </div>
+
   );
 }
 
