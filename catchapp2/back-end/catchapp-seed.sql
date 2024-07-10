@@ -59,3 +59,5 @@ VALUES ('tensleep',
         '-108.73',
         'Lander is home to many crags, but Wild Iris may be its most unique area. At an elevation of 9000 ft it makes for an excellent escape from the summer heat.',
         'https://www.novaugust.net/blog/wp-content/uploads/2013/07/IMG_8509.jpg?ref=blog.novaugust.net');
+
+INSERT INTO messages (message_text, area, from_user)
