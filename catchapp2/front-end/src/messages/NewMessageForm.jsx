@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CatchAppApi from "../api/api";
 
 /** New message form.
@@ -9,7 +9,6 @@ import CatchAppApi from "../api/api";
  */
 
 function NewMessageForm({ area, user }) {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     messageText: "",
     area: area,
@@ -31,8 +30,7 @@ function NewMessageForm({ area, user }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     let result = await CatchAppApi.postMessage(formData);
-    console.log(result);
-    navigate(`/areas/${area}/messages`);
+    formData.messageText = "";
   }
 
   /** Update form data field */

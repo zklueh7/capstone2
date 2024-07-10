@@ -43,17 +43,18 @@ class Message {
   static async findAll(searchFilters = {}) {
     console.log("searchFilters", searchFilters);
     const { area } = searchFilters;
-    console.log(area);
     const messagesRes = await db.query(
-                `SELECT id,
-                        message_text AS "messageText",
-                        area,
-                        from_user AS "fromUser",
-                        time_posted AS "timePosted"
-                FROM messages
-                WHERE area = $1`, [area]);
+                `SELECT m.id,
+                        m.message_text AS "messageText",
+                        m.area,
+                        m.from_user AS "fromUser",
+                        m.time_posted AS "timePosted",
+                        u.picture_url AS "pictureUrl"
+                FROM messages m
+                LEFT JOIN users AS u ON u.username = m.from_user
+                WHERE area = $1
+                ORDER BY m.time_posted ASC;`, [area]);
 
-    // const messagesRes = await db.query(query, queryValues);
     return messagesRes.rows; 
   }
 

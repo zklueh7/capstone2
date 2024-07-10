@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "properties": {
+      "messageText": {
+        "type": "string"
+      },
+      "area": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 30
+      },
+      "fromUser": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 30
+      }
+    },
+    "additionalProperties": true,
+    "required": [
+      "messageText",
+      "area",
+      "fromUser"
+    ]
+  }
+  

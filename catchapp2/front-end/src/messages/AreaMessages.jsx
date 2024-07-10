@@ -17,7 +17,6 @@ function AreaMessages() {
   console.debug("AreaMessages");
   const { area } = useParams();
   const { currentUser } = useContext(UserContext);
-  const time = "now";
   console.log(area);
 
   const [areaInfo, setAreaInfo] = useState(null);
@@ -26,15 +25,16 @@ function AreaMessages() {
   useEffect(function getAreaAndMessageInfoOnMount() {
     console.debug("getAreaAndMessageInfoOnMount");
     search(area);
-  }, []);
+  }, [messages]);
 
   /** Loads area info and messages. */
   async function search(area) {
     let areaInfo = await CatchAppApi.getArea(area);
     setAreaInfo(areaInfo);
     let messages = await CatchAppApi.getMessages(area);
-    setMessages(messages);
     console.log(messages);
+    setMessages(messages);
+
   }
   if (!areaInfo) return <LoadingSpinner />;
   if (!messages) return <LoadingSpinner />;
@@ -46,7 +46,7 @@ function AreaMessages() {
       ? <MessageCard messages={messages} />
       : <p className="lead">Sorry, no messages yet!</p>
       }
-      <NewMessageForm area={area} user={currentUser.username} time={time}/>
+      <NewMessageForm area={area} user={currentUser.username} />
     </div>
     
   );

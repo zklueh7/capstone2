@@ -1,0 +1,15 @@
+.thumbnail {
+    width: 50px;
+    display: inline;
+}
+
+.msg-info {
+    display: inline;
+    font-style: italic;
+    margin-left: 10px;
+
+}
+
+.msg-text {
+    margin-left: 60px;
+}

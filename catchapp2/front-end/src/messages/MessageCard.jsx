@@ -1,4 +1,5 @@
 import React from "react";
+import "./Message.css";
 
 /** Show list of message cards.
  *
@@ -17,8 +18,9 @@ function MessageCard({ messages }) {
         {messages.map(message => (
           <div className="card">
             <div className="card-body">
-              <p>{message.fromUser} ({message.timePosted})</p>
-              <p>Message: {message.messageText}</p>
+              <img src={message.pictureUrl} className="thumbnail"></img>
+              <p className="msg-info">{message.fromUser} ({message.timePosted.slice(11,16)}, {message.timePosted.slice(0,10)})</p>
+              <p className="msg-text">{message.messageText}</p>
             </div>
           </div>
           
