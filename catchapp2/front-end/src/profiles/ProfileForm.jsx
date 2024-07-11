@@ -88,7 +88,7 @@ function ProfileForm() {
 
     // trigger reloading of user information throughout the site
     setCurrentUser(updatedUser);
-    navigate("/");
+    navigate("/profile");
   }
 
   /** Handle form data changing */
