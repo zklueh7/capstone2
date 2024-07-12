@@ -3,47 +3,34 @@ const bcrypt = require("bcrypt");
 const db = require("../db.js");
 const { BCRYPT_WORK_FACTOR } = require("../config");
 
-const testJobIds = [];
-
 async function commonBeforeAll() {
   // noinspection SqlWithoutWhere
-  await db.query("DELETE FROM companies");
+  await db.query("DELETE FROM areas");
   // noinspection SqlWithoutWhere
   await db.query("DELETE FROM users");
 
   await db.query(`
-    INSERT INTO companies(handle, name, num_employees, description, logo_url)
-    VALUES ('c1', 'C1', 1, 'Desc1', 'http://c1.img'),
-           ('c2', 'C2', 2, 'Desc2', 'http://c2.img'),
-           ('c3', 'C3', 3, 'Desc3', 'http://c3.img')`);
-
-  const resultsJobs = await db.query(`
-    INSERT INTO jobs (title, salary, equity, company_handle)
-    VALUES ('Job1', 100, '0.1', 'c1'),
-           ('Job2', 200, '0.2', 'c1'),
-           ('Job3', 300, '0', 'c1'),
-           ('Job4', NULL, NULL, 'c1')
-    RETURNING id`);
-  testJobIds.splice(0, 0, ...resultsJobs.rows.map(r => r.id));
+    INSERT INTO areas (name, title, latitude, longitude, description, picture_url)
+    VALUES ('a1', 'A1', 'lat1', 'long1', 'desc1', 'http://img1.img'),
+           ('a2', 'A2', 'lat2', 'long2', 'desc2', 'http://img2.img')`);
 
   await db.query(`
-        INSERT INTO users(username,
+        INSERT INTO users (username,
                           password,
                           first_name,
                           last_name,
-                          email)
-        VALUES ('u1', $1, 'U1F', 'U1L', 'u1@email.com'),
-               ('u2', $2, 'U2F', 'U2L', 'u2@email.com')
+                          email,
+                          looking_for_partners,
+                          climbing_type,
+                          experience_level,
+                          picture_url)
+        VALUES ('u1', $1, 'U1F', 'U1L', 'u1@email.com', 'Yes', 'Sport', '1 year', 'http://img1.img'),
+               ('u2', $2, 'U2F', 'U2L', 'u2@email.com', 'Yes', 'Trad', '10 years', 'http://img2.img')
         RETURNING username`,
       [
         await bcrypt.hash("password1", BCRYPT_WORK_FACTOR),
         await bcrypt.hash("password2", BCRYPT_WORK_FACTOR),
       ]);
-
-  await db.query(`
-        INSERT INTO applications(username, job_id)
-        VALUES ('u1', $1)`,
-      [testJobIds[0]]);
 }
 
 async function commonBeforeEach() {
@@ -64,5 +51,4 @@ module.exports = {
   commonBeforeEach,
   commonAfterEach,
   commonAfterAll,
-  testJobIds,
 };
